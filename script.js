@@ -1,15 +1,47 @@
 const items = document.querySelectorAll('.item');
-
 const cart = document.getElementById('cart');
-
 const checkoutButton = document.getElementById('checkoutButton');
 
 let itemCount = 0;
 
 items.forEach(item => {
+
     item.addEventListener('dragstart', (event) => {
         event.dataTransfer.setData('text', event.target.id);
     });
+
+    item.addEventListener('touchstart', (event) => {
+        event.preventDefault();
+        const touch = event.touches[0];
+        const itemId = item.id;
+
+        item.style.position = 'absolute';
+        item.style.left = `${touch.pageX}px`;
+        item.style.top = `${touch.pageY}px`;
+
+        const onTouchMove = (e) => {
+            const touch = e.touches[0];
+            item.style.left = `${touch.pageX}px`;
+            item.style.top = `${touch.pageY}px`;
+        };
+
+        const onTouchEnd = (e) => {
+            const rect = cart.getBoundingClientRect();
+            if (touch.pageX >= rect.left && touch.pageX <= rect.right &&
+                touch.pageY >= rect.top && touch.pageY <= rect.bottom) {
+                cart.dispatchEvent(new CustomEvent('drop', {
+                    detail: { itemId }
+                }));
+            }
+
+            document.removeEventListener('touchmove', onTouchMove);
+            document.removeEventListener('touchend', onTouchEnd);
+        };
+
+        document.addEventListener('touchmove', onTouchMove);
+        document.addEventListener('touchend', onTouchEnd);
+    });
+
 });
 
 cart.addEventListener('dragover', (event) => {
@@ -17,10 +49,9 @@ cart.addEventListener('dragover', (event) => {
 });
 
 cart.addEventListener('drop', (event) => {
-    event.preventDefault();
-
-    const itemId = event.dataTransfer.getData('text');
-
+    event.preventDefault();    
+    
+    const itemId = event.dataTransfer.getData('text') || event.detail.itemId;
     const item = document.getElementById(itemId);
 
     if (item) {
