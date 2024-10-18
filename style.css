@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.banner {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+    .shelves {
+        background-image: url('./assets/stand.svg');
+        background-size: cover;
+        min-width: 300px;
+        min-height: 600px;
+        padding: 10px;
+        .shelf {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+        }
+    }   
+}
+
+#shelf1{
+    height: 150px;
+    margin-top: 23px;
+}
+
+#shelf2{
+    display: flex;
+    align-items: center;
+    height: 63px;
+    margin-top: 75px;
+}
+
+#shelf3{
+    height: 80px;
+    margin-top: 50px;
+}
+
+.item {
+    height: max-content;
+    cursor: grab;
+}
+
+.wrapper_cart{
+    position: absolute;
+    margin-top: 500px;
+    .cart {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+}
+
+#checkoutButton {
+    position: absolute;
+    margin-top: 500px;
+    padding: 12px 18px;
+    background-color: #FCE000;
+    border: none;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 16px;
+    z-index: 2;
+}
+
+#checkoutButton.blinking {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}

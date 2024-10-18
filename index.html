@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yandex Lavka</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="banner">
+        <div class="shelves">
+            <div class="shelf" id="shelf1">
+                <div draggable="true" >
+                    <img class="item" src="./assets/wine.svg" alt="product" id="item1"/>
+                </div>
+                <div draggable="true">
+                    <img class="item" src="./assets/milk.svg" alt="product" id="item2"/>
+                </div>
+                <div draggable="true">
+                    <img class="item" src="./assets/jam.svg" alt="product" id="item3"/>
+                </div>
+                <div draggable="true">
+                    <img class="item" src="./assets/cheese.svg" alt="product" id="item4"/>
+                </div>
+            </div>
+            <div class="shelf" id="shelf2">
+                <div draggable="true">
+                    <img class="item" src="./assets/steak.svg" alt="product" id="item5"/>
+                </div>
+                <div draggable="true">
+                    <img class="item" src="./assets/chicken.svg" alt="product" id="item6"/>
+                </div>
+                <div draggable="true">
+                    <img class="item" src="./assets/chips.svg" alt="product" id="item7"/>
+                </div>
+            </div>
+            <div class="shelf" id="shelf3">
+                <div draggable="true">
+                    <img class="item" src="./assets/pineapple.svg" alt="product" id="item8"/>
+                </div>
+                <div draggable="true">
+                    <img class="item" src="./assets/bananas.svg" alt="product" id="item9"/>
+                </div>
+                <div draggable="true" >
+                    <img class="item" src="./assets/apple.svg" alt="product" id="item10"/>
+                </div>
+                <div draggable="true" >
+                    <img class="item" src="./assets/cabbage.svg" alt="product" id="item11"/>
+                </div>
+            </div>
+        </div>
+        <div class="wrapper_cart">
+            <div class="cart" id="cart">
+                <img src="./assets/cart.svg" alt="cart"/>
+            </div>
+        </div>
+    </div>
+    <button id="checkoutButton" style="display: none;">Оплатить корзину</button>
+    <script src="script.js"></script>
+</body>
+</html>
