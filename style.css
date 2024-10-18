@@ -14,11 +14,9 @@ body {
 }
 
 .banner {
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
     .shelves {
         background-image: url('./assets/stand.svg');
         background-size: cover;
@@ -57,7 +55,7 @@ body {
 
 .wrapper_cart{
     position: absolute;
-    margin-top: 500px;
+    margin-top: 420px;
     .cart {
         position: relative;
         display: flex;
