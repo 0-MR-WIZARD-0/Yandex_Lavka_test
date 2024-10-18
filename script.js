@@ -27,11 +27,18 @@ items.forEach(item => {
 
         const onTouchEnd = (e) => {
             const rect = cart.getBoundingClientRect();
+
+            console.log(`Touch coordinates: (${touch.pageX}, ${touch.pageY})`);
+            console.log(`Cart boundaries:`, rect);
+
             if (touch.pageX >= rect.left && touch.pageX <= rect.right &&
                 touch.pageY >= rect.top && touch.pageY <= rect.bottom) {
                 cart.dispatchEvent(new CustomEvent('drop', {
                     detail: { itemId }
                 }));
+            }else{
+                console.log("fuck");
+                
             }
 
             document.removeEventListener('touchmove', onTouchMove);
