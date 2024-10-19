@@ -13,32 +13,49 @@ items.forEach(item => {
     item.addEventListener('touchstart', (event) => {
         event.preventDefault();
         const touch = event.touches[0];
-        const itemId = item.id;
 
         item.style.position = 'absolute';
-        item.style.left = `${touch.pageX}px`;
-        item.style.top = `${touch.pageY}px`;
+        item.style.left = `${touch.clientX}px`;
+        item.style.top = `${touch.clientY}px`;
 
         const onTouchMove = (e) => {
             const touch = e.touches[0];
-            item.style.left = `${touch.pageX}px`;
-            item.style.top = `${touch.pageY}px`;
+            item.style.left = `${touch.clientX}px`;
+            item.style.top = `${touch.clientY}px`;
         };
 
         const onTouchEnd = (e) => {
-            const rect = cart.getBoundingClientRect();
+            const cartRect = cart.getBoundingClientRect();
+            const touch = e.changedTouches[0]; 
 
-            console.log(`Touch coordinates: (${touch.pageX}, ${touch.pageY})`);
-            console.log(`Cart boundaries:`, rect);
+            const touchX = touch.pageX;
+            const touchY = touch.pageY;
 
-            if (touch.pageX >= rect.left && touch.pageX <= rect.right &&
-                touch.pageY >= rect.top && touch.pageY <= rect.bottom) {
-                cart.dispatchEvent(new CustomEvent('drop', {
-                    detail: { itemId }
-                }));
+            const isInCart = (
+                touchX >= cartRect.left &&
+                touchX <= cartRect.right &&
+                touchY >= cartRect.top + window.scrollY && 
+                touchY <= cartRect.bottom + window.scrollY
+            );
+        
+            if (isInCart) {
+                item.style.position = 'absolute';
+                if (Math.random() > 0.5) {
+                    item.style.marginTop = '8%';
+                    item.style.marginLeft = `${itemCount * 10}px`;
+                } else {
+                    item.style.marginTop = '5%';
+                    item.style.marginRight = `${itemCount * 10}px`;
+                }
+                item.style.zIndex = "-1";
+                itemCount++;
+
+                if (itemCount >= 3) {
+                    checkoutButton.style.display = 'block';
+                    checkoutButton.classList.add('blinking');
+                }
             }else{
-                console.log("fuck");
-                
+                console.log("error");
             }
 
             document.removeEventListener('touchmove', onTouchMove);
